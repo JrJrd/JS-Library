@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library Project</title>
+ 
   </head>
   <body>
     <main
@@ -16,6 +17,20 @@
     >
       <div>
         <h1>Library Project</h1>
+        <form action="" id="form">
+            <div class="form-group"><label for="title">Title</label>
+                <input type="text" name="title" id="title">
+            </div>
+            <div class="form-group"><label for="author">Author</label>
+                <input type="text" name="author" id="author">
+            </div>
+            <div class="form-group"><label for="read">Read</label>
+                <input type="checkbox" name="read" id="read">
+            </div>
+            <div class="form-group"><button type="submit" id="submitBtn"></button>Add Book
+            </div>
+        </form>
+        <hr/>
         <div id="library">
           <!-- Add table here -->
           <table id="table" style="min-width: 680px; margin: 2rem">
@@ -43,6 +58,7 @@
             </tbody>
           </table>
         </div>
+      </div>
     </main>
 
     <script src="app.js"></script>
