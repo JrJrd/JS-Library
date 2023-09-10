@@ -1,12 +1,15 @@
+//app.js
 const books = [
   {
-    title: "Name of the Wind",
-    author: "Patrick Rothfuss",
+    id: 1,
+    title: "Lord of the Ring",
+    author: "John R. R.",
     read: true,
   },
 ];
 class Book {
-  constructor(title, author, read) {
+  constructor(id, title, author, read) {
+    this.id = id;
     this.title = title;
     this.author = author;
     this.read = read;
@@ -15,7 +18,7 @@ class Book {
 
 class Library {
   constructor(books) {
-    this.bookCount = books.length;
+    this.nextId = books.length;
     this.books = books;
   }
 
@@ -24,10 +27,14 @@ class Library {
     const author = document.getElementById("author");
     const read = document.getElementById("read");
 
-    const newBook = new Book(title.value, author.value, read.checked);
+    this.nextId++;
+    const newBook = new Book(
+      this.nextId,
+      title.value,
+      author.value,
+      read.checked
+    );
     this.books.push(newBook);
-
-    this.bookCount++;
     //select table body
     const tbody = document.getElementById("tableBody");
     //create a new table row
@@ -39,11 +46,17 @@ class Library {
     // add text content to td's w/book values
     newTitle.textContent = title.value;
     newAuthor.textContent = author.value;
+
     const newCheckbox = document.createElement("input");
+    newCheckbox.id = newBook.id;
     newCheckbox.type = "checkbox";
     newCheckbox.checked = read.checked;
-    newCheckbox.disabled = read.check;
-    
+    newRead.appendChild(newCheckbox);
+    newCheckbox.disabled = read.checked;
+
+    newCheckbox.addEventListener("click", (event) => {
+      this.markRead(event.target, parseInt(event.target.id));
+    });
     newRead.appendChild(newCheckbox);
     //append td's to the tr
     newTr.appendChild(newTitle);
@@ -55,9 +68,12 @@ class Library {
 
   markRead(checkbox, id) {
     this.books.forEach((book) => {
+      // if (id === book.id && !book.read)
       if (id === book.id) {
+        //book.read = checkbox.checked;
+        // checkbox.disabled = checkbox.checked;
         book.read = true;
-        checkbox.checked = true;
+        //checkbox.checked = true;
         checkbox.disabled = true;
       }
     });
